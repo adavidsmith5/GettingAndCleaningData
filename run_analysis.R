@@ -17,6 +17,7 @@ ytrain <- read.table("y_train.txt")
 trainsubject <- read.table("subject_train.txt")
 testsubject <- read.table("subject_test.txt")
 
+# Setting column names to variable names that are readable and make sense
 # Variable names for the testing/training data
 features <- read.table("features.txt")
 
@@ -29,4 +30,20 @@ names(trainsubject) <- "subjectid"
 names(testsubject) <- "subjectid"
 names(ytrain) <- "activity"
 names(ytest) <- "activity"
+
+# Combining data into one dataframe
+#Binding the subject id's to the training and test data
+trainsubjectdata <- cbind(trainsubject, xtrain)
+testsubjectdata <- cbind(testsubject, xtest)
+
+# Binding variables data into one data frame and the label data into a second data frame
+combinedx <- rbind(trainsubjectdata, testsubjectdata)
+combinedy <- rbind(ytrain, ytest)
+
+# Selecting only the columns that deal with the mean and standard deviations of each variable
+limit <- grepl("mean\\(|std|subjectid", colnames(combinedx))
+simplifiedx <- combinedx[limit]
+
+# Combining variables data and labels data into one data frame
+phonedata <- cbind(simplifiedx, combinedy)
 
