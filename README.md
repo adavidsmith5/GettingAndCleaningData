@@ -1,6 +1,6 @@
 # GettingAndCleaningData
 Final project for the Getting and Cleaning Data course from Johns Hopkins on Coursera
-The goal of this project is to take data separated into test/train and labels data and combine them into one tidy dataframe using R.
+The goal of this project is to take data separated into test/train and labels data and combine them into one tidy dataframe using R. The script for the project is meant to be run when the required files are in the working directory.
 
 ## 1. Gathering of Data
 The data for this project was obtained from accelerometers in the Samsung Galaxy S smartphone. The full description can be found at:
