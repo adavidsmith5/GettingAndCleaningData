@@ -55,4 +55,4 @@ phonedata <- cbind(simplifiedx, combinedy)
 # Grouping and then finding the mean of each variable
 ## First the data is grouped by subject id and activity. Then the mean is found of each variable by those groups.
 ## This will be the final, tidy data set.
-phonedata <- phonedata %>% group_by(subjectid, activity) %>% summarise_all("mean")
+meanphonedata <- phonedata %>% group_by(subjectid, activity) %>% summarise_all(list(average=mean))
