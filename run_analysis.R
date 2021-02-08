@@ -18,8 +18,9 @@ trainsubject <- read.table("subject_train.txt")
 testsubject <- read.table("subject_test.txt")
 
 # Setting column names to variable names that are readable and make sense
-## Variable names for the testing/training data
+## Variable and activity names for the testing/training data
 features <- read.table("features.txt")
+activities <- read.table("activity_labels.txt")
 
 ## Changing column names to the variable names in the features file
 names(xtest) <- features[["V2"]]
@@ -30,6 +31,10 @@ names(trainsubject) <- "subjectid"
 names(testsubject) <- "subjectid"
 names(ytrain) <- "activity"
 names(ytest) <- "activity"
+
+## Changing activity values from numbers to readable activity names
+ytrain$activity <- mapvalues(ytrain$activity, from=activities$V1, to=activities$V2)
+ytest$activity <- mapvalues(ytest$activity, from=activities$V1, to=activities$V2)
 
 # Combining data into one dataframe
 ## Binding the subject id's to the training and test data
@@ -50,4 +55,4 @@ phonedata <- cbind(simplifiedx, combinedy)
 # Grouping and then finding the mean of each variable
 ## First the data is grouped by subject id and activity. Then the mean is found of each variable by those groups.
 ## This will be the final, tidy data set.
-grouped <- phonedata %>% group_by(subjectid, activity) %>% summarise_all("mean")
+phonedata <- phonedata %>% group_by(subjectid, activity) %>% summarise_all("mean")
